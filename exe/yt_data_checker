@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require 'pry'
+require 'optparse'
+require 'yt_data_checker'
+
+CONCERNS = %w[channel_ownership subscriber_count].freeze
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = 'Usage: yt_data_checker file1.csv file2.csv [CONCERN]'
+  opts.separator ''
+  opts.on('-c', '--concern CONCERN', "Only output discrepancies related to that data. (options: #{CONCERNS.join(', ')})") do |c|
+    options[:concern] = c.to_sym
+  end
+end.parse!
+
+YtDataChecker::Validate.new(ARGV[0], ARGV[1], options).run
