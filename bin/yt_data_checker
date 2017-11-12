@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'yt_data_checker/cli'
+YtDataChecker::CLI.start
